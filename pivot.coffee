@@ -370,6 +370,8 @@ callWithJQuery ($) ->
                 agg = @tree[flatRowKey][flatColKey]
             return agg ? {value: (-> null), format: -> ""}
 
+    $.PivotData = PivotData;
+    
     ###
     Default Renderer for hierarchical table layout
     ###

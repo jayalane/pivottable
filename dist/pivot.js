@@ -730,7 +730,9 @@
       return PivotData;
 
     })();
-
+      
+    $.PivotData = PivotData;
+      
     /*
     Default Renderer for hierarchical table layout
      */
