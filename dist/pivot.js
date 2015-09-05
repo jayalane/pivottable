@@ -929,6 +929,9 @@
         pivotData = new PivotData(input, opts);
         try {
           result = opts.renderer(pivotData, opts.rendererOptions);
+          if (result.isDirective) {
+            return result;
+          }
         } catch (_error) {
           e = _error;
           if (typeof console !== "undefined" && console !== null) {

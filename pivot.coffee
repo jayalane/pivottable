@@ -542,6 +542,8 @@ callWithJQuery ($) ->
             pivotData = new PivotData(input, opts)
             try
                 result = opts.renderer(pivotData, opts.rendererOptions)
+                if result.isDirective
+                    return result;
             catch e
                 console.error(e.stack) if console?
                 result = $("<span>").html opts.localeStrings.renderError
@@ -953,5 +955,4 @@ callWithJQuery ($) ->
         barcharter ".pvtTotal.colTotal"
 
         return this
-
 
