@@ -907,7 +907,7 @@
     Pivot Table core: create PivotData object and call Renderer on it
      */
     $.fn.pivot = function(input, opts) {
-      var defaults, e, pivotData, result, x;
+      var defaults, e, error, error1, pivotData, result, x;
       defaults = {
         cols: [],
         rows: [],
@@ -929,15 +929,15 @@
         pivotData = new PivotData(input, opts);
         try {
           result = opts.renderer(pivotData, opts.rendererOptions);
-        } catch (_error) {
-          e = _error;
+        } catch (error) {
+          e = error;
           if (typeof console !== "undefined" && console !== null) {
             console.error(e.stack);
           }
           result = $("<span>").html(opts.localeStrings.renderError);
         }
-      } catch (_error) {
-        e = _error;
+      } catch (error1) {
+        e = error1;
         if (typeof console !== "undefined" && console !== null) {
           console.error(e.stack);
         }
@@ -954,7 +954,7 @@
     Pivot Table UI: calls Pivot Table core above with options set by user
      */
     $.fn.pivotUI = function(input, inputOpts, overwrite, locale) {
-      var a, aggregator, attrLength, axisValues, c, colList, defaults, e, existingOpts, fn, i, initialRender, k, l, len1, len2, len3, len4, n, o, opts, pivotTable, q, ref, ref1, ref2, ref3, ref4, refresh, refreshDelayed, renderer, rendererControl, shownAttributes, tblCols, tr1, tr2, uiTable, unusedAttrsVerticalAutoCutoff, unusedAttrsVerticalAutoOverride, x;
+      var a, aggregator, attrLength, axisValues, c, colList, defaults, e, error, existingOpts, fn, i, initialRender, k, l, len1, len2, len3, len4, n, o, opts, pivotTable, q, ref, ref1, ref2, ref3, ref4, refresh, refreshDelayed, renderer, rendererControl, shownAttributes, tblCols, tr1, tr2, uiTable, unusedAttrsVerticalAutoCutoff, unusedAttrsVerticalAutoOverride, x;
       if (overwrite == null) {
         overwrite = false;
       }
@@ -1352,8 +1352,8 @@
           items: 'li',
           placeholder: 'pvtPlaceholder'
         });
-      } catch (_error) {
-        e = _error;
+      } catch (error) {
+        e = error;
         if (typeof console !== "undefined" && console !== null) {
           console.error(e.stack);
         }
