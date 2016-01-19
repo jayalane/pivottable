@@ -107,6 +107,17 @@ callWithJQuery ($) ->
             format: formatter
             numInputs: if num? and denom? then 0 else 2
 
+        sumOverMax: (formatter=usFmt) -> ([num, denom]) -> (data, rowKey, colKey) ->
+            sumNum: 0
+            sumDenom: 0
+            push: (record) ->
+                @sumNum   += parseFloat(record[num])   if not isNaN parseFloat(record[num])
+                x = parseFloat(record[denom])
+                if not isNaN x then @the_max = Math.max(x, @the_max ? x)
+            value: -> @sumNum/@the_max
+            format: formatter
+            numInputs: if num? and denom? then 0 else 2
+
         sumOverSumBound80: (upper=true, formatter=usFmt) -> ([num, denom]) -> (data, rowKey, colKey) ->
             sumNum: 0
             sumDenom: 0
@@ -140,6 +151,7 @@ callWithJQuery ($) ->
         "Minimum":              tpl.min(usFmt)
         "Maximum":              tpl.max(usFmt)
         "Sum over Sum":         tpl.sumOverSum(usFmt)
+        "Sum over Max":         tpl.sumOverMax(usFmt)
         "80% Upper Bound":      tpl.sumOverSumBound80(true, usFmt)
         "80% Lower Bound":      tpl.sumOverSumBound80(false, usFmt)
         "Sum as Fraction of Total":     tpl.fractionOf(tpl.sum(),   "total", usFmtPct)
